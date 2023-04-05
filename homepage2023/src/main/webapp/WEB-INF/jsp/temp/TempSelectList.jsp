@@ -9,36 +9,39 @@
 <meta http-equiv= "Content-Language" content="ko">
 <title>데이터 가져오기</title>
 <script src="https://code.jquery.com/jquery-Latest.min.js"></script>
+<style>
+table{border-collapse: collapse;}
+th{font_weight:bold;}
+th, td{padding:5px;border:1px solid #000;}
+</style>
 </head>
 <body>
-${result.tempId} : ${result.tempVal }
-
-<div class="box-btn">
-  <c:url var="uptUrl" value="/temp/tempRegist.do">
-    <c:param name="tempId" value="${result.tempId}"/>
-  </c:url>
-  <a href="${uptUrl}">수정</a>
-  
-    <c:url var="delurl" value="/temp/delete.do">
-    <c:param name="tempId" value="${result.tempId}"/>
-    </c:url>
-    <a href="${delUrl }" class="btn-del">삭제</a>
-   
-    <a href="/temp/selectList.do">목록</a>
-</div>
+<table>
+   <thead>
+   <tr>
+      <th>TEMP_ID</th>
+      <th>TEMP_VAL</th>
+   </tr>
+   </thead>
+   <tbody>
+      <c:forEach var="result" items="${resultList }">
+      <tr>
+         <td><c:out value="${result.tempId}"/></td>
+          <td><c:out value="${result.tempVal}"/></td>
+      </tr>
+      
+      </c:forEach>
+   </tbody> 
+</table>
+<button type="button" id="btn-reg" data-href="/temp/tempRegist.do">등록하기</button>
 <script>
 $(document).ready(function(){
-	$(".btn-del").click(function(){
-		if(!confirm("삭제하겠습니다.")){
-			return false;
-		}
+	//등록하기
+	$("#btn-reg").click(function(){
+		location.href = $(this).data("href");
 	});
 });
 </script>
-
-
-
-</div>
 
 
 

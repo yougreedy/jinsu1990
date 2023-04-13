@@ -19,7 +19,7 @@ ${result.tempId} : ${result.tempVal }
   </c:url>
   <a href="${uptUrl}">수정</a>
   
-    <c:url var="delurl" value="/temp/delete.do">
+    <c:url var="delUrl" value="/temp/delete.do">
     <c:param name="tempId" value="${result.tempId}"/>
     </c:url>
     <a href="${delUrl }" class="btn-del">삭제</a>

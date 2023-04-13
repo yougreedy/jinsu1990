@@ -16,12 +16,13 @@
      <c:set var="actionUrl" value="/temp/update.do"/>
   </c:when>
   <c:otherwise>
-     <c:set var="actionUrl" value="/temp/inset.do"/>
+     <c:set var="actionUrl" value="/temp/insert.do"/>
   </c:otherwise>
 </c:choose>
 
    <%-- <form action="/temp/insert.do" method="post" name="tempVO"> --%>
-  <form action="/temp/insert.do" method="post" name="tempVO">
+  <form action="${actionUrl}" method="post" name="tempVO">
+    <input type="hidden" name="tempId" value="${result.tempId}"/>
      <lable for="tempVal">값 정보 : </lable>
      <input type="text" id="tempVal" name="tempVal" value="${result.tempVal}"/>
      <br/>

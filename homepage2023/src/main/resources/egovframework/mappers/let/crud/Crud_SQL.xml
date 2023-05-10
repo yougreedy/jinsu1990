@@ -6,10 +6,8 @@
     <result property="crudId" column="CRUD_ID"/>
     <result property="crudSj" column="CRUD_SJ"/>
     <result property="crudCn" column="CRUD_CN"/>
-    <result property="crudNm" column="CRUD_MN"/>
-    <result property="frstReqistPnttm" column="FRST_REGIST_PNTTM"/>
-  
-  
+    <result property="userNm" column="USER_NM"/>
+    <result property="frstRegistPnttm" column="FRST_REGIST_PNTTM"/>
   </resultMap>
   
   
@@ -43,7 +41,7 @@
 	 </select>
   	
   	
-  	<insert id="intsetCurd" parameterType="egovframework.let.crud.service.CrudVO">
+  	<insert id="insertCrud" parameterType="egovframework.let.crud.service.CrudVO">
 		INSERT INTO LETCRUD (
 		  CRUD_ID
 		  ,CRUD_SJ
@@ -54,22 +52,22 @@
 		    #{crudId}
 		    ,#{crudSj}
 		    ,#{crudCn}
-		    ,#{crudNm}
+		    ,#{userNm}
 		    , NOW()
 		   	 )
      </insert>
      
      <update id="updateCrud" parameterType="egovframework.let.crud.service.CrudVO">
 	     UPDATE LETCRUD SET
-	       CRUD_SJ = #{crud_Sj}
-	      ,CRUD_CN = #{crud_Cn}
-	      ,USER_NM  = #{crud_Nm}
-	      WHERE CRUD_ID = #{crud_Id} 
+	       CRUD_SJ = #{crudSj}
+	      ,CRUD_CN = #{crudCn}
+	      ,USER_NM  = #{userNm}
+	      WHERE CRUD_ID = #{crudId} 
      </update>
      
      <delete id="deleteCrud" parameterType="egovframework.let.crud.service.CrudVO">
         DELETE FROM LETCRUD 
-        WHERE CRUD_ID = #{crud_Id}
+        WHERE CRUD_ID = #{crudId}
      </delete>
      
   	

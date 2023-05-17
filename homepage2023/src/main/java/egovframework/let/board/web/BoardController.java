@@ -16,6 +16,7 @@ import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.let.board.service.BoardService;
 import egovframework.let.board.service.BoardVO;
 import egovframework.let.crud.service.CrudVO;
+import egovframework.let.utl.fcc.service.EgovStringUtil;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -56,6 +57,30 @@ public class BoardController {
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute("USER_INFO", user);
 		return "board/BoardSelectList";
+	}
+  
+  //게시물 등록/수정
+	@RequestMapping(value = "/board/boardRegist.do")
+	public String boardRegist(@ModelAttribute("searchVO")BoardVO boardVO, HttpServletRequest request, ModelMap model)throws Exception{
+	  LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser(); 
+	  if(user == null || user.getId() == null) {
+		  model.addAttribute("message", "로그인 후 사용가능합니다.");
+          return "forward:/board/selectList.do";
+	  } else {
+		  model.addAttribute("USER_INFO", user);
+	  }
+	  BoardVO result = new BoardVO();
+	  if(!EgovStringUtil.isEmpty(boardVO.getBoardId())) {
+	  //  result = boardService.selectBoard(boardVO);
+	  //본인 및 관리자만 허용
+	  if(!user.getId().equals(result.getFrstRegisterId()) && !"admin".equals(user.getId())) {
+		  model.addAttribute("message", "작성자 본인만 확인 가능합니다.");
+		  return "forward:/board/selectList.do";
+	  }
+  }
+	  model.addAttribute("result", result);
+      request.getSession().removeAttribute("sessionBoard");	
+	  return "board/BoardRegist";
 	}
    
 }

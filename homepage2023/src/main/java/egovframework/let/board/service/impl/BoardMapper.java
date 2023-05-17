@@ -18,4 +18,4 @@ public interface BoardMapper {
 	  int selectBoardListCnt(BoardVO vo) throws Exception;
 		 
 	  
-	  }
+  }

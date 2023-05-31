@@ -159,6 +159,13 @@ $(function(){
 		                    <textarea id="boardCn" name="boardCn" rows="15" title="내용입력"><c:out value="${result.boardCn}"/></textarea>
 		                </td>
 		            </tr>
+		            <tr>
+		                <th scope="row">파일첨부</th>
+		                <td>
+		                   <input type="file" name="file_1"/><br/>
+		                   <input type="file" name="file_2"/>
+		                </td>
+		            </tr>         
 		        </tbody>
 		    </table>
 			<div class="btn-cont ar">

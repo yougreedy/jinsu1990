@@ -42,7 +42,7 @@
         <dl class="info_view2">
           <dt>작성자ID</dt>
           <dd><c:out value="${result.frstRegisterId}"/></dd>
-          <dt>작성자</dt>
+          <dt>작성일</dt>
           <dd><fmt:formatDate value="${result.frstRegistPnttm}" pattern="yyyy-MM-dd"/></dd>
           <dt>조회수</dt>
           <dd><c:out value="${result.inqireCo}"/></dd>

@@ -12,8 +12,8 @@
       <result property="othbcAt" column="OTHBC_AT"/>
       <result property="useAt" column="USE_AT"/>
       <result property="atchFildId" column="ATCH_FILE_ID"/>
-      <result property="frstRegistPnttm" column="FRST_REGIST_PNTTM "/>
-      <result property="frstRegisterId" column="FRST_REGISTER_ID "/>
+      <result property="frstRegistPnttm" column="FRST_REGIST_PNTTM"/>
+      <result property="frstRegisterId" column="FRST_REGISTER_ID"/>
     </resultMap>
 
 
@@ -127,5 +127,47 @@
         INQIRE_CO = INQIRE_CO + 1
      WHERE BOARD_ID = #{boardId}  
    </update>	
+  	
+  	 <update id="updateBoard" parameterType="egovframework.let.board.service.BoardVO">
+     UPDATE BOARD SET
+       BOARD_SJ = #{boardSj}
+       ,BOARD_CN = #{boardCn}
+       ,NOTICE_AT = #{noticeAt}
+       ,OTHBC_AT = #{othbcAt}
+       <if test='atchFileId != null and atchFileId != ""'>
+          ,ATCH_FILE_ID = #{atchFileId}
+       </if>
+      ,LAST_UPDT_PNTTM = NOW()
+      ,LAST_UPDUSR_ID = #{userId}
+      WHERE BOARD_ID = #{boardId} 
+      <if test='mngAt != "Y"'>
+         AND FRST_REGISTER_ID = #{userId}
+      </if>
+               
+   </update>	
+  	
+  	 <update id="deleteBoard" parameterType="egovframework.let.board.service.BoardVO">
+     UPDATE BOARD SET
+        USE_AT = 'N'
+     WHERE BOARD_ID = #{boardId} 
+     <if test='mngAt != "Y"'>
+         AND FRST_REGISTER_ID = #{userId}
+      </if>
+   </update>	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
 </mapper>

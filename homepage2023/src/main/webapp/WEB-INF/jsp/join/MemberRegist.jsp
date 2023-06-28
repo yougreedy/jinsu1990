@@ -3,27 +3,29 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Language" content="ko" >
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,initial-seale=1.0,minimum-seale=1.0,maximun-seale=1.0,user-scalable=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>회원가입</title>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/asset/member/css/login.css">
 </head>
 <body>
 
 <div class="tit_intro_step">
-	<ul>
-		<li>약관동의</li>
-		<li>회원유형</li>
-		<li class="current">정보입력</li>
-		<li>가입완료</li>
-	</ul>
+	<div class="tit_intro_step">
+	    <ul>
+	        <li>약관동의</li>
+	        <li>회원유형</li>
+	        <li class="current">정보입력</li>
+	        <li>가입완료</li>
+	    </ul>
+	</div>
 </div>
 
 <h2 class="icon1">회원정보입력</h2>
@@ -33,15 +35,16 @@
 <form id="frm" name="frm" method="post" action="/join/insertMember.do" onsubmit="return regist();">
 	<input type="hidden" name="loginType" value="${searchVO.loginType}"/>
 	<input type="hidden" id="idCheckAt" value="N"/>
-	
+		
+			
 	<table class="join_chart">
-		<caption>게시글 작성</caption>
-		<colgroup>
-			<col style="width:200px" />
-			<col />
-		</colgroup>
-		<tbody>
-			<tr>
+        <caption>게시글 작성</caption>
+        <colgroup>
+            <col style="width:200px" />
+            <col />
+        </colgroup>
+        <tbody>
+            <tr>
 				<th><strong class="star">*</strong><label for="emplyrId">회원 아이디</label></th>
 				<td>
 					<input type="text" id="emplyrId" name="emplyrId" required/>
@@ -57,12 +60,19 @@
 				<td><input type="password" id="password" name="password" required/></td>
 			</tr>
 			<tr>
-				<th><strong class="star">*</strong><label for="password">비밀번호 확인</label></th>
+				<th><strong class="star">*</strong><label for="password2">비밀번호 확인</label></th>
 				<td><input type="password" id="password2" required/></td>
 			</tr>
 			<tr>
 				<th><strong class="star">*</strong><label for="passwordHint">비밀번호 힌트</label></th>
-				<td><input type="text" id="passwordHint" name="passwordHint" required/></td>
+				<td>
+				  <select id = "passwordHint" name ="passwordHint" required>
+				     <option value="1">취미 생활은?</option>
+				     <option value="2">애완견 이름은?</option>
+				     <option value="3">취직하고 싶은 것은?</option>
+				     <option value="4">여행가고 싶은 곳은?</option>
+				  </select>
+				</td>
 			</tr>
 			<tr>
 				<th><strong class="star">*</strong><label for="passwordCnsr">비밀번호 정답</label></th>
@@ -72,44 +82,44 @@
 				<th><strong class="star">*</strong><label for="emailId">이메일</label></th>
 				<td>
 					<input type="text" id="emailId" name="emailId" required/> @ <input type="text" id="emailDomain" name="emailDomain" required/>
-					<select id="donmain">
+					<select id="domain">
 						<option value="">직접입력</option>
 						<option value="daum.net">다음</option>
 						<option value="naver.com">네이버</option>
 						<option value="gmail.com">구글(G메일)</option>
-						<option value="nate.com">네이트</option>	
-					</select>
+						<option value="nate.com">네이트</option>
+					</select> 
 				</td>
 			</tr>
-		</tbody>
-	</table>
-	
+        </tbody>
+    </table>
+			
 	<div class="btn-cont ac">
 		<button type="submit" class="btn spot">가입</button>
 	</div>
 </form>
 
 <script>
-$(document).ready(function() {
+$(document).ready(function(){
 	//아이디 중복 검사
-	$("#btn-id-check").click(function() {
+	$("#btn-id-check").click(function(){
 		var emplyrId = $("#emplyrId").val();
 		
-		if(emplyrId) {
+		if(emplyrId){
 			$.ajax({
 				url : "/join/duplicateCheck.do",
 				type : "post",
 				data : {"emplyrId" : emplyrId},
 				dataType : "json",
-				success : function(data) {
-					if(data.successYn == "Y") {
+				success : function(data){
+					if(data.successYn == "Y"){
 						alert("사용가능한 ID입니다.");
 						$("#idCheckAt").val("Y");
 					}else{
 						alert(data.message);
 						$("#idCheckAt").val("N");
 					}
-				}, error : function() {
+				}, error : function(){
 					alert("error");
 				}
 			});
@@ -121,17 +131,18 @@ $(document).ready(function() {
 	});
 	
 	//이메일
-	$("#domain").change(function() {
+	$("#domain").change(function(){
 		let domain = $(this).val();
 		
-		$("#emailDomain").val(domain);	
+		$("#emailDomain").val(domain);
 	});
 });
 
 //validation 체크
 function regist(){
 	//아이디 중복 검사 체크
-	if($("#idCheckAt").val() != "Y") {
+	
+	if($("#idCheckAt").val() != "Y"){
 		alert("아이디 중복 검사를 해주세요.");
 		return false;
 	}else if(!$("#emplyrId").val()){
@@ -157,34 +168,34 @@ function regist(){
 		return false;
 	}
 	
-	if($("#password").val()) {
+	if($("#password").val()){
 		var pw = $("#password").val(),
-			message = "",
-			//대소문자, 특수문자, 숫자는 8자리 이상 정규형
-			passwordRules1 = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-)](?=.*[0-9]).{8,30}$/,
-			//대소문자, 숫자는 10자리 이상 정규형
-			passwordRules2 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{10,30}$/,
-			result = false;
-			
-		if(pw.length < 10) {
-			if(!passwordRules1.test(pw)) {
+	  	    message = "",
+	  	    //대소문자, 특수문자, 숫자는 8자리 이상 정규형
+	  	    passwordRules1 = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,30}$/,
+	  		//대소문자, 숫자는 10자리 이상 정규형
+	  	    passwordRules2 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{10,30}$/,
+	  	    result = false;
+		
+	  	if(pw.length < 10){
+	  		if(!passwordRules1.test(pw)){
 				message = "영문, 숫자, 특수문자 등 3가지 사용시 8자 이상, 2가지 사용시 10자리 이상";
 			}else{
 				result = true;
 			}
-		}
-		
-		if(!passwordRules2.test(pw) && !result) {
-			message = "영문, 숫자, 특수문자 등 3가지 사용시 8자 이상, 2가지 사용시 10자리 이상";
-		}else{
-			result = true;
-		}
-		
-		if(message.length > 0) {
+	  	}
+	  	
+  		if(!passwordRules2.test(pw) && !result){
+  			message = "영문, 숫자, 특수문자 등 3가지 사용시 8자 이상, 2가지 사용시 10자리 이상";
+  		}else{
+  			result = true;
+  		}
+  		
+  		if(message.length > 0){
 			alert(message + " 입력해주세요.");
 			return false;
 		}
-	}			
+	}
 }
 </script>
 

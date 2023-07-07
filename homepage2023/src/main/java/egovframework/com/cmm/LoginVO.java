@@ -45,7 +45,7 @@ public class LoginVO implements Serializable{
 	/** 조직(부서)명 */
 	private String orgnztNm;
 	/** 고유아이디 */
-	private String uniqId;
+	private String uniqId; 
 	/** 로그인 후 이동할 페이지 */
 	private String url;
 	/** 사용자 IP정보 */

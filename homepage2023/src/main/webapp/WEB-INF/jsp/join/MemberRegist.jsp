@@ -111,12 +111,12 @@ $(document).ready(function(){
 				type : "post",
 				data : {"emplyrId" : emplyrId},
 				dataType : "json",
-				success : function(data){
-					if(data.successYn == "Y"){
+				success : function(result){
+					if(result.successYn == "Y"){
 						alert("사용가능한 ID입니다.");
 						$("#idCheckAt").val("Y");
 					}else{
-						alert(data.message);
+						alert(result.message);
 						$("#idCheckAt").val("N");
 					}
 				}, error : function(){

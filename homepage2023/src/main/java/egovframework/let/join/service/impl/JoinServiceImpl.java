@@ -41,7 +41,7 @@ public class JoinServiceImpl extends EgovAbstractServiceImpl implements JoinServ
 		 
 		 //입력한 비밀번호를 암호화한다.
 		 String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(),vo.getEmplyrId());
-		 vo.setEsntlId(esntlId);
+		 vo.setPassword(enpassword);
 		 
 		 //이메일
 		 if(EgovStringUtil.isEmpty(vo.getEmailId()) && EgovStringUtil.isEmpty(vo.getEmailDomain())) {

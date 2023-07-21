@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/asset/member/css/login.css">
 </head>
 <body>
-  <h2 class="iconl">아이디 찾기</h2>
+  <h2 class="icon1">아이디 찾기</h2>
   <p class="mB20">회원가입 시 등록한 정보를 입력해주세요.</p>
   
   <div class="bg-area change_box">
@@ -27,6 +27,10 @@
                <div>
                   <label for="userNm">회원명</label>
                   <input type="text" name="userNm" class="inp" id="userNm">
+               </div>
+               <div>
+                  <label for="emailAdres">이메일</label>
+                  <input type="text" name="emailAdres" class="inp" id="emailAdres">
                </div>
                <div>
                   <label for="passwordHint">힌트</label>

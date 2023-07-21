@@ -11,6 +11,8 @@ import egovframework.let.join.service.JoinService;
 import egovframework.let.join.service.JoinVO;
 import egovframework.let.join.service.impl.JoinMapper;
 import egovframework.let.login.service.LoginService;
+import egovframework.let.member.service.MemberService;
+import egovframework.let.member.service.MemberVO;
 import egovframework.let.utl.fcc.service.EgovStringUtil;
 import egovframework.let.utl.sim.service.EgovFileScrty;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
@@ -20,30 +22,36 @@ import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 
-@Service("egovLoginService")
-public class MemberServiceImpl extends EgovAbstractServiceImpl implements LoginService{
+@Service("memberService")
+public class MemberServiceImpl extends EgovAbstractServiceImpl implements MemberService{
+
+	@Resource(name="memberMapper")
+	private MemberMapper memberMapper;
+	
+	//회원id찾기
+	@Override
+	public MemberVO findId(MemberVO vo) throws Exception {
+        
+		return memberMapper.findId(vo);
+	}
+     
+	//회원비빌번호찾기
+	@Override
+	public MemberVO findPassword(MemberVO vo) throws Exception {
+		return memberMapper.findPassword(vo);
+	}
+
+	//회원비밀번호업데이트
+	@Override
+	public void passwordUpdate(MemberVO vo) throws Exception {
+	    //입력한 비밀번호를 암호화한다.
+		String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), vo.getEmplyrId());
+		vo.setPassword(enpassword);
+		memberMapper.passwordUpdate(vo);	
+	}
+
+	
    
 
-	  @Resource(name = "loginMapper")
-	  private MemberMapper loginMapper;
-	  
-	  //일반 로그인 처리한다.
-	  public LoginVO actionLogin(LoginVO vo)throws Exception {
-	
-		 //입력한 비밀번호를 암호화한다.
-		 String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(),vo.getId());
-		 vo.setPassword(enpassword);
-		 
-		 //아이디와 암호화된 비밀번호가 DB와 일치하는지 확인한다.ㅣ
-		 LoginVO loginVO = loginMapper.actionLogin(vo);
-		 
-		 if(loginVO != null && !loginVO.getId().equals("") && !loginVO.getPassword().equals("")) {
-			 return loginVO;
-		 } else {
-			 loginVO = new LoginVO();
-		 }
 
-		 return loginVO;
-
-    }
 }

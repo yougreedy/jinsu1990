@@ -50,7 +50,25 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 		memberMapper.passwordUpdate(vo);	
 	}
 
+    //회원목록
+	@Override
+	public List<EgovMap> selectMberList(MemberVO vo) throws Exception {
+		return memberMapper.selectMberList(vo);
+	}
 	
+    //회원목록 수
+	@Override
+	public int selectMberListCnt(MemberVO vo) throws Exception {
+		return memberMapper.selectMberListCnt(vo);
+	}
+
+	//회원상세
+	@Override
+	public EgovMap selectMber(MemberVO vo) throws Exception {
+		return memberMapper.selectMber(vo);
+	}
+
+  
    
 
 

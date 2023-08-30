@@ -18,6 +18,12 @@
 	        	<entry key="photoThumbHeight" value="140"/>
 	        	<entry key="imagePageUnit" value="12"/>
 	        	<entry key="imagePageSize" value="10"/>
+	        	     
+	        	<entry key="mail.gmailUser" value="yougreedy@gmail.com"/>     
+	        	<entry key="mail.gmailUserName" value="한국폴리택대학진수"/>     
+	        	<entry key="mail.gmailPassword" value="ceqdetynenqsbbie"/>     
+	        	     
+	        	     
 	        	       	
 	        </map>
 		</property>

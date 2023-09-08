@@ -27,4 +27,37 @@ public class Globals {
 	public static final String UPLOAD_FILE_NM = "uploadFileName";
 	//파일경로
 	public static final String FILE_PATH = "filePath";
+	
+	//네이버 클리언트ID
+	public static final String NAVER_CLIENTID = EgovProperties.getProperty("NAVER.clientId");
+    
+	//네이버 시크릿키	
+	public static final String NAVER_CLIENTSECRET = EgovProperties.getProperty("NAVER.clientSecret");
+	
+	//네이버 리다이렉트URL	
+    public static final String NAVER_REDIRECTURI = EgovProperties.getProperty("NAVER.redirectUri");
+		
+    //개인페이지	
+  	public static final String NAVER_PAGE = EgovProperties.getProperty("NAVER.MainPage");
+  	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

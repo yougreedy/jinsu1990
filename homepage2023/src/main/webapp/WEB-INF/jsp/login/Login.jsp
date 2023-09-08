@@ -37,6 +37,12 @@
 								<input type="password" id="pwd" name="password" value="" class="inp" title="비밀번호를 입력하세요." placeholder="비밀번호를 입력하세요." autocomplete="off">
 							</span>
 							<button type="submit" class="btn-lg spot p10">로그인</button>
+							
+							<div class="btn-cont">
+							   <a class="btn-kakao" href="#" data-type="login">
+							      <img src="http://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="200" alt="카카오 로그인 버튼"/>
+							   </a>
+							</div>
 						</fieldset>
 					</form>
 				</div>
@@ -69,7 +75,7 @@ function checkGnrlLogin(frm) {
 		return false;
 	}
 	
-	${"#frmGnrlLogin"};
+	$("#frmGnrlLogin");
 }
 
 $(document).ready(function() {
@@ -79,7 +85,53 @@ $(document).ready(function() {
 
 </script>
 
+<form id="frmLogin" name="frmLogin" method="post" action="/login/actionLogin.do">
+   <input type="hidden" name="loginType" value="">
+   <input type="hidden" id="snsId"  name="id">
+</form>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+   $(document).ready(function(){
+	   //카카오 로그인 버튼
+   $(".btn-kakao").click(function(){
+	  const type = $(this).data("type");
+	  kakaoLogin(type);
+	  return false;
+     });
+ });
+
+
+//카카오 키 정보 입력
+Kakao.init('6a66473ce936756921fea4d4d3f737ae'); //본인 JAVASCRIPT키
+
+//카카오SDK 초기화
+Kakao.isInitialized();
+
+//카카오로그인
+function kakaoLogin(type) {
+	Kakao.Auth.login({
+		success: function (response) {
+			Kakao.API.request ({
+				url: '/v2/user/me',
+				success : function (response) {
+					console.log(response)
+					$("input[name=loginType]").val("KAKAO");
+					$("#snsId").val(response.id);
+					$("#frmLogin").submit();
+				},
+				fail: function (error) {
+					console.log(error)
+				},
+			})
+		}, fail: function (error) {
+			console.log(error)
+		},
+	})
+}
+
+
+</script>
 
 </body>
 </html>

@@ -31,7 +31,7 @@ public class NaverLoginServiceImpl extends EgovAbstractServiceImpl implements Na
 	private final static String REDIRCT_URI = Globals.NAVER_REDIRECTURI;
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
-	private final static String PROFILE_API_URL = "https//openapi.naver.com/v1/nid/me";
+	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 	
 	/* 네이버 아이디로 인증 URL 생성 Method */
 	@Override
@@ -98,7 +98,7 @@ public class NaverLoginServiceImpl extends EgovAbstractServiceImpl implements Na
 				.url(PROFILE_API_URL)
 				.method("GET", null)
 				.addHeader("Content-Type", "application/x-www-form-urlencoded")
-				.addHeader("Authorization", "Bearer" + oauthToken.getAccessToken())
+				.addHeader("Authorization", "Bearer " + oauthToken.getAccessToken())
 				.build();
 		Response response = client.newCall(request).execute();
 		

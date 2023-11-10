@@ -75,9 +75,9 @@
                 <tbody>
                    <c:forEach var="result" items="${resultList}" varStatus="status">
                       <tr>
-                        <td class="num"><c:out value="${pageinationInfo.totalRecordCount - ((searchVO.pageIndex) * searchVO.pageUnit) - (status.count - 1)}"/></td>
+                        <td class="num"><c:out value="${paginationInfo.totalRecordCount - ((searchVO.pageIndex - 1) * searchVO.pageUnit) - (status.count - 1)}" /></td>
                            <td class="tit">
-                               <c:url var="updateUrl" value="/admin/rsv/rsvRegist.do{_BASE_PARAM}">
+                               <c:url var="updateUrl" value="/admin/rsv/rsvRegist.do${_BASE_PARAM}">
                                    <c:param name="resveId" value="${result.resveId}" />
                                    <c:param name="pageIndex" value="${searchVO.pageIndex}" />
                                </c:url>
@@ -121,7 +121,7 @@
                       </tr>
                    </c:forEach>
                    <%-- 글이 없을 경우 --%>
-                   <c:if test="${fn:length(resultLis) == 0}">
+                   <c:if test="${fn:length(resultList) == 0}">
                        <tr class="empty"><td colspan="9">검색 테이터가 없습니다.</td></tr>
                    </c:if>
                 </tbody>

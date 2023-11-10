@@ -15,7 +15,7 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	//강사명
 	private String recNm;
 	//최대참가인원
-	private String maxAplyCnt;
+	private int maxAplyCnt;
 	//운영시작일
 	private String useBeginDt;
 	//운영종료일
@@ -33,7 +33,7 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	//사용여부
 	private String useAt;
 	//최초등록시점
-	private java.util.Date frstReqistPnttm;
+	private java.util.Date frstRegistPnttm;
 	//최초등락자 id
 	private String frstRegisterId;
 	//최종수정시점
@@ -52,11 +52,6 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	private int applyFCnt;
 	//검색일자
 	private String searchDate;
-	
-	
-	
-	
-	
 	public String getResveId() {
 		return resveId;
 	}
@@ -69,7 +64,7 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	public String getRecNm() {
 		return recNm;
 	}
-	public String getMaxAplyCnt() {
+	public int getMaxAplyCnt() {
 		return maxAplyCnt;
 	}
 	public String getUseBeginDt() {
@@ -96,8 +91,8 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	public String getUseAt() {
 		return useAt;
 	}
-	public java.util.Date getFrstReqistPnttm() {
-		return frstReqistPnttm;
+	public java.util.Date getFrstRegistPnttm() {
+		return frstRegistPnttm;
 	}
 	public String getFrstRegisterId() {
 		return frstRegisterId;
@@ -138,7 +133,7 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	public void setRecNm(String recNm) {
 		this.recNm = recNm;
 	}
-	public void setMaxAplyCnt(String maxAplyCnt) {
+	public void setMaxAplyCnt(int maxAplyCnt) {
 		this.maxAplyCnt = maxAplyCnt;
 	}
 	public void setUseBeginDt(String useBeginDt) {
@@ -165,8 +160,8 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	public void setUseAt(String useAt) {
 		this.useAt = useAt;
 	}
-	public void setFrstReqistPnttm(java.util.Date frstReqistPnttm) {
-		this.frstReqistPnttm = frstReqistPnttm;
+	public void setFrstRegistPnttm(java.util.Date frstRegistPnttm) {
+		this.frstRegistPnttm = frstRegistPnttm;
 	}
 	public void setFrstRegisterId(String frstRegisterId) {
 		this.frstRegisterId = frstRegisterId;
@@ -195,6 +190,10 @@ public class ReservationVO extends ComDefaultVO implements Serializable {
 	public void setSearchDate(String searchDate) {
 		this.searchDate = searchDate;
 	}
+	
+	
+	
+	
 	
 	
 

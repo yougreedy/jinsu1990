@@ -19,11 +19,11 @@ public class ReservationApplyVO extends ReservationVO implements Serializable {
 	//이메일
 	private String email;
     //  R: 접수, o : 승인완료, x: 반려
-	private String cofmSeCode;
+	private String confmSeCode;
 	//승인자ID
 	private String confmerId;
 	//반려사요
-	private String returnResn;
+	private String returnRean;
 	//승인일자
 	private java.util.Date confmPnttm;
 	//등록IP
@@ -52,7 +52,6 @@ public class ReservationApplyVO extends ReservationVO implements Serializable {
     private String reqsttempId;
     
     
-    
 	public String getResveId() {
 		return resveId;
 	}
@@ -71,14 +70,14 @@ public class ReservationApplyVO extends ReservationVO implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	public String getCofmSeCode() {
-		return cofmSeCode;
+	public String getConfmSeCode() {
+		return confmSeCode;
 	}
 	public String getConfmerId() {
 		return confmerId;
 	}
-	public String getReturnResn() {
-		return returnResn;
+	public String getReturnRean() {
+		return returnRean;
 	}
 	public java.util.Date getConfmPnttm() {
 		return confmPnttm;
@@ -137,14 +136,14 @@ public class ReservationApplyVO extends ReservationVO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setCofmSeCode(String cofmSeCode) {
-		this.cofmSeCode = cofmSeCode;
+	public void setConfmSeCode(String confmSeCode) {
+		this.confmSeCode = confmSeCode;
 	}
 	public void setConfmerId(String confmerId) {
 		this.confmerId = confmerId;
 	}
-	public void setReturnResn(String returnResn) {
-		this.returnResn = returnResn;
+	public void setReturnRean(String returnRean) {
+		this.returnRean = returnRean;
 	}
 	public void setConfmPnttm(java.util.Date confmPnttm) {
 		this.confmPnttm = confmPnttm;
@@ -187,6 +186,7 @@ public class ReservationApplyVO extends ReservationVO implements Serializable {
 	}
     
     
+	
 	
 	
 	

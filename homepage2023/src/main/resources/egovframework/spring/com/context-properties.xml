@@ -23,7 +23,8 @@
 	        	<entry key="mail.gmailUserName" value="한국폴리택대학진수"/>     
 	        	<entry key="mail.gmailPassword" value="ceqdetynenqsbbie"/>     
 	        	     
-	        	     
+	        	 <!-- 예약자 업로드 폴리경로 -->    
+	        	<entry key="rsvFileStorePath" value="${Globals.File}/upload/rsv"/>     
 	        	       	
 	        </map>
 		</property>

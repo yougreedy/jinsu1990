@@ -183,9 +183,75 @@ public class ReservationApplyController {
                 
                 return "rsv/RsvApplySelectList";
 	    			
-	    
+	 }	 
+      
+      //예약자정보 상세
+      @RequestMapping(value = "/rsv/rsvApplySelect.do")
+      public String rsvApplySelect(@ModelAttribute("searchVO") ReservationApplyVO searchVO, HttpServletRequest request, ModelMap model)throws Exception{
+    	  LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+	      if(user == null || EgovStringUtil.isEmpty(user.getId())) {
+	    	  model.addAttribute("message", "로그인 후 사용가능합니다.");
+	    	  return "forward:/rsv/selectList.do";
+	      }else {
+	    	  model.addAttribute("USER_INFO", user);
+	      }
 	      
-	 }	      
+	      ReservationApplyVO result = reservationApplyService.selectReservationApply(searchVO);
+	      
+	      model.addAttribute("result", result);
+	      
+	      //이중서블릿방지
+	      request.getSession().removeAttribute("sessionResrvationApply");
+	      return "rsv/RsvApplySelect";
+      }
+      
+      
+      //예약자정보 수정하기
+      @RequestMapping(value = "/rsv/rsvApplyUpdate.do")
+      public String rsvApplyUpdate(@ModelAttribute("searchVO") ReservationApplyVO searchVO, HttpServletRequest request, ModelMap model)throws Exception{
+    	   //이중서블릿방지체크
+  		if(request.getSession().getAttribute("sessionReservationApply") != null) {
+  			return"forward:/rsv/selectList.do";
+  		}
+  		
+  		  LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+  	      if(user == null || EgovStringUtil.isEmpty(user.getId())) {
+  	    	  model.addAttribute("message", "로그인 후 사용가능합니다.");
+  	    	  return "forward:/rsv/selectList.do";
+  	      }
+  	      
+  	      searchVO.setUserId(user.getId());
+  	      
+  	      reservationApplyService.updateReservationApply(searchVO);
+  	      
+  	      //이중서블릿방지
+	      request.getSession().setAttribute("sessionResrvationApply", searchVO);
+	      
+	      return "forward:/rsv/selectApplyList.do";
+	      
+	      
+  	      
+      }
+      
+      //예약정보 삭제하기
+      @RequestMapping(value = "/rsv/rsvApplyDelete.do")
+      public String rsvApplyDelete(@ModelAttribute("searchVO") ReservationApplyVO searchVO, HttpServletRequest request, ModelMap model)throws Exception{
+    	  LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+	      if(user == null || EgovStringUtil.isEmpty(user.getId())) {
+	    	  model.addAttribute("message", "로그인 후 사용가능합니다.");
+	    	  return "forward:/rsv/selectList.do";
+      
+	      }
+	      
+	      searchVO.setUserId(user.getId());
+	      
+	      reservationApplyService.deleteReservationApply(searchVO);
+	      
+	      return "forward:/rsv/selectApplyList.do";
+	      }
+      
+      
+      
   }
 
 
